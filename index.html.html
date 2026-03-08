@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aria Chen · frontend portfolio</title>
+  <!-- Poppins & Inter · clean modern sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font awesome 6 (free) for subtle icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f7fafd;
+      font-family: 'Inter', sans-serif;
+      color: #1a2b3e;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    /* main card – soft float, blur backdrop, micro-interactions */
+    .portfolio {
+      max-width: 1300px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-radius: 3rem;
+      box-shadow: 0 30px 60px -20px rgba(0, 40, 80, 0.25),
+                  inset 0 1px 1px rgba(255,255,255,0.8);
+      padding: 2.5rem 2.8rem;
+      border: 1px solid rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+
+    .portfolio:hover {
+      box-shadow: 0 40px 70px -15px rgba(18, 52, 106, 0.3);
+    }
+
+    /* header area — name + role + subtle glow */
+    .intro {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      border-bottom: 2px dashed rgba(0,112,243,0.15);
+      padding-bottom: 2rem;
+    }
+
+    .name h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 3.8rem;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #1f2f48, #1b4b8f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #e7f0fe;
+      border-radius: 60px;
+      padding: 0.5rem 1.2rem;
+      font-weight: 500;
+      font-size: 1rem;
+      color: #0077ff;
+      border: 1px solid rgba(0,119,255,0.25);
+      backdrop-filter: blur(4px);
+      margin-top: 0.5rem;
+    }
+
+    .badge i {
+      margin-right: 6px;
+      font-size: 0.9rem;
+    }
+
+    .status {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(255,255,255,0.5);
+      padding: 0.8rem 1.8rem;
+      border-radius: 60px;
+      border: 1px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .pulse {
+      width: 12px;
+      height: 12px;
+      background: #1ed88f;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(30, 216, 143, 0.5);
+      animation: pulse-green 2s infinite;
+    }
+
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 0 0 rgba(30, 216, 143, 0.6); }
+      70% { box-shadow: 0 0 0 10px rgba(30, 216, 143, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(30, 216, 143, 0); }
+    }
+
+    /* tagline — kinetic typography */
+    .tagline {
+      margin: 2rem 0 2.5rem 0;
+      font-size: 1.8rem;
+      font-weight: 400;
+      background: rgba(255,255,255,0.4);
+      padding: 1.2rem 2rem;
+      border-radius: 4rem;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.9);
+      display: inline-block;
+      box-shadow: 0 6px 14px rgba(0, 30, 60, 0.05);
+    }
+
+    .tagline strong {
+      font-weight: 600;
+      background: linear-gradient(145deg, #003c8b, #2f6ed4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      border-bottom: 3px solid #377dff;
+    }
+
+    /* project grid — minimal, large previews, smooth */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3.2rem 0 2.2rem;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 2.2rem;
+      padding: 1.8rem 1.6rem 2rem 1.6rem;
+      border: 1px solid rgba(255,255,255,0.8);
+      transition: all 0.25s ease;
+      box-shadow: 0 15px 30px -15px rgba(0,40,80,0.1);
+      cursor: default;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      border-color: white;
+      box-shadow: 0 30px 40px -18px #004ba0;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .card-icon {
+      font-size: 2.6rem;
+      background: rgba(0,119,255,0.1);
+      width: 60px;
+      height: 60px;
+      border-radius: 30% 70% 70% 30% / 30% 55% 45% 70%; /* organic blob */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0066e0;
+      margin-bottom: 1.6rem;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+
+    .project-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.8rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.2rem 0 1.5rem;
+    }
+
+    .project-tags span {
+      background: white;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid #eef4ff;
+      color: #1d3d6b;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #1a4cbc;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    .demo-link i {
+      transition: transform 0.2s;
+    }
+
+    .demo-link:hover {
+      border-bottom-color: #1a4cbc;
+    }
+    .demo-link:hover i {
+      transform: translateX(6px);
+    }
+
+    /* skill clusters – micro interactive chips */
+    .craft-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid rgba(255,255,255,0.7);
+    }
+
+    .skill-set {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .skill-chip {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid rgba(0, 68, 148, 0.15);
+      transition: all 0.2s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .skill-chip:hover {
+      background: white;
+      border-color: #0077ff;
+      transform: scale(1.05);
+      box-shadow: 0 8px 12px -8px #1f4f9e;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 1.6rem;
+      color: #1e3f70;
+    }
+
+    .contact-links a {
+      color: inherit;
+      transition: all 0.2s;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: 50%;
+      border: 1px solid rgba(0,60,130,0.1);
+      box-shadow: 0 6px 12px -10px #0c2b55;
+      text-decoration: none;
+    }
+
+    .contact-links a:hover {
+      background: #0077ff;
+      color: white;
+      transform: translateY(-5px);
+      border-color: #0077ff;
+    }
+
+    /* special micro interaction – moving gradient underline */
+    .moving-bg {
+      background: linear-gradient(90deg, #0c359e, #00a6ff, #6f4dbf, #0c359e);
+      background-size: 300% 100%;
+      animation: moveGradient 6s infinite alternate;
+      height: 4px;
+      width: 140px;
+      border-radius: 4px;
+      margin: 1.2rem 0 0.2rem;
+    }
+
+    @keyframes moveGradient {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* quote / small aesthetic */
+    .foot-note {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      color: #2d4f7c;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* responsiveness */
+    @media (max-width: 700px) {
+      .portfolio { padding: 1.8rem; }
+      .name h1 { font-size: 2.8rem; }
+      .tagline { font-size: 1.4rem; padding: 1rem 1.5rem; }
+      .intro { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .craft-section { flex-direction: column; align-items: flex-start; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="portfolio">
+    <!-- header: name + status (moving pulse) -->
+    <div class="intro">
+      <div class="name">
+        <h1>Aria Chen</h1>
+        <div class="badge">
+          <i class="fas fa-sparkles" style="color: #0077ff;"></i> frontend architect · UI alchemist
+        </div>
+      </div>
+      <div class="status">
+        <span class="pulse"></span>
+        <span style="font-weight: 500; letter-spacing: 0.3px;">#opentowork · crafting pixels</span>
+      </div>
+    </div>
+
+    <!-- kinetic tagline that screams "I design superb UX" -->
+    <div class="tagline">
+      <i class="fas fa-magic" style="margin-right: 12px; color: #3f6ef0;"></i>
+      I don’t just write code — I <strong>sculpt experiences</strong> that feel like moving art.
+    </div>
+
+    <!-- PROJECT SHOWCASE — three rich cards, each better than the last -->
+    <div class="project-grid">
+      <!-- card 1: LUMINA (micro-interactions driven) -->
+      <div class="project-card">
+        <div class="card-icon"><i class="fas fa-sun"></i></div>
+        <h3>Lumina</h3>
+        <p style="color: #1e3b5c;">Mood‑driven dashboard with liquid animations & real‑time blur.</p>
+        <div class="project-tags">
+          <span>Vue 3</span><span>GSAP</span><span>Framer motion</span><span>Glassmorphism</span>
+        </div>
+        <a href="#" class="demo-link" onclick="return false;">live prototype <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- card 2: NORDIC SPACE (e‑commerce concept) -->
+      <div class="project-card">
+        <div class="card-icon"><i class="fas fa-snowflake"></i></div>
+        <h3>Nordic Space</h3>
+        <p>Minimalist shop with 3D hover states, and soft‑state transitions.</p>
+        <div class="project-tags">
+          <span>React</span><span>Tailwind</span><span>Three.js</span><span>micro‑interactions</span>
+        </div>
+        <a href="#" class="demo-link" onclick="return false;">case study <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- card 3: NEUROFLOW (AI portfolio tool) extra moving element -->
+      <div class="project-card">
+        <div class="card-icon"><i class="fas fa-brain"></i></div>
+        <h3>Neuroflow</h3>
+        <p>Generative UI playground — every click warps gradient, live typography.</p>
+        <div class="project-tags">
+          <span>WebGL</span><span>Canvas</span><span>Motion</span><span>ML vibes</span>
+        </div>
+        <a href="#" class="demo-link" onclick="return false;">explore concept <i class="fas fa-arrow-right"></i></a>
+        <!-- subtle moving gradient (the little design detail) -->
+        <div class="moving-bg" style="width: 100%; margin-top: 1rem; opacity: 0.5;"></div>
+      </div>
+    </div>
+
+    <!-- Skills + contact + moving gradient bar (visual delight) -->
+    <div class="craft-section">
+      <div class="skill-set">
+        <span class="skill-chip"><i class="far fa-gem" style="margin-right: 6px;"></i>UI/UX obsessed</span>
+        <span class="skill-chip"><i class="fas fa-code"></i> React/Vue/Svelte</span>
+        <span class="skill-chip"><i class="fas fa-mobile-alt"></i> responsive first</span>
+        <span class="skill-chip"><i class="fas fa-cloud-sun"></i> micro‑motion</span>
+        <span class="skill-chip"><i class="fas fa-paint-brush"></i> design tokens</span>
+      </div>
+      <div class="contact-links">
+        <a href="#" aria-label="github" onclick="return false;"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="linkedin" onclick="return false;"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="dribbble" onclick="return false;"><i class="fab fa-dribbble"></i></a>
+        <a href="#" aria-label="figma" onclick="return false;"><i class="fab fa-figma"></i></a>
+      </div>
+    </div>
+
+    <!-- unique detail: moving gradient line + resume hint (underlines superb design) -->
+    <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1.8rem;">
+      <div class="moving-bg" style="width: 80px; height: 6px; border-radius: 8px;"></div>
+      <span style="font-weight: 400; letter-spacing: 0.5px; color: #244466;"><i class="far fa-file-pdf" style="margin-right: 8px;"></i>interactive resume (motion edition)</span>
+    </div>
+
+    <!-- tiny footquote: design philosophy -->
+    <div class="foot-note">
+      <i class="fas fa-quote-right" style="opacity: 0.4; font-size: 1.8rem;"></i>
+      <span>every pixel has a purpose — and a little soul. that's my frontend signature.</span>
+    </div>
+
+    <!-- hidden little accessibility: demonstrates i care about micro details -->
+    <div style="height: 10px;"></div>
+  </main>
+
+  <!-- a small style extender for extra spark (icon hover etc) -->
+  <style>
+    /* additional moving magic for the card icon blobs */
+    .project-card:hover .card-icon {
+      background: rgba(0,119,255,0.2);
+      border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
+      transition: border-radius 0.5s ease;
+    }
+    .project-card .card-icon {
+      transition: border-radius 0.4s, background 0.2s;
+    }
+    /* smooth block */
+    .skill-chip i {
+      margin-right: 5px;
+      font-size: 0.9rem;
+      color: #0070e0;
+    }
+    body {
+      transition: background 0.3s;
+    }
+    /* name gets extra floating effect */
+    .name h1 {
+      text-shadow: 0 5px 20px rgba(0,80,200,0.15);
+    }
+  </style>
+  <!-- (all links use onclick="return false;" so they don't actually navigate — just showcase) -->
+</body>
+</html>
